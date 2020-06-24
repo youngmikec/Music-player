@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Music App</title>
+    <link rel="stylesheet" href="C:/Users/rf/Desktop/Js-dev/pluralsight-js-dev-env/src/bootstrap.min.css">
+    <link rel="stylesheet" href="C:/Users/rf/Desktop/Js-dev/pluralsight-js-dev-env/src/bootstrap.min.css">
+    <style>
+        body{
+
+            color: white;
+            margin: 0;
+            padding: 0;
+            background-image: url('C:/Users/rf/Downloads/food-img1.jpg');
+        }
+    </style>
+
+</head>
+<body>
+    <div id="overlay" class="d-visible ">
+        <div class="overlay-img text-light">
+            <h1>Mysound</h1>
+            <h3>dev by Mikec @juicy_code inc.</h3>
+            <h6>copyright mikec 2020.</h6>
+            <img src="C:\Users\rf\Desktop\Js-dev\pluralsight-js-dev-env\uploads\musicsymbol.jpg" style="height: 20vh;" alt="">
+        </div>
+    </div>
+    <!-- <table>
+        <thead>
+            <tr>
+                <th>firstname</th>
+                <th>lastname</th>
+                <th>email</th>
+            </tr>
+        </thead>
+        <tbody id="users">
+
+        </tbody>
+    </table> -->
+    <div id="root" class="d-none">
+        <!-- <h1>Hello Mike's App</h1> -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 bg-bg p-rel" >
+                    <div id="nav" class="container-fluid"></div>
+                    <div id="thumbnail"></div>
+                </div>
+                <div class="col-sm-12 bg-yl p-rel">
+                    <br>
+                    <br>
+                    <audio style="display: none" src="C:/Users/rf/Desktop/Js-dev/pluralsight-js-dev-env/uploads/Kizz-Daniel-Pak-N-Go.mp3" controls="true"></audio>
+                </div>
+            </div>
+            <div id="button-section" class="p-abs">
+                <a class="text-light"><i class="glyphicon glyphicon-envelop"></i>previous</a>
+                <a class="text-light"><i class="glyphicon glyphicon-envelop"></i>play</a>
+                <a class="text-light"><i class="glyphicon glyphicon-envelop"></i>next</a>
+                <span id="loop" class="text-light"><i class="glyphicon glyphicon-envelop"></i>loop</span>
+            </div>
+        </div>
+    </div>
+    <script src="C:/Users/rf/Desktop/Js-dev/pluralsight-js-dev-env/src/index.js"></script>
+</body>
+</html>
