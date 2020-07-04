@@ -1,57 +1,73 @@
 const overlay = document.querySelector('#overlay');
 const root = document.querySelector('#root');
-const musicList = [
-    {
-        id: 1,
-        name: 'Kizz-Daniel-Pak-N-Go.mp3',
-        img: '../uploads/falz the bad guy.jpg',
-        isFavorite: false,
-        artist: 'kizz Daniel'
-    },
-    {
-        id: 2,
-        name: '15-BROWN-SKIN-GIRL-feat.-Blue-Ivy-C-Wizkid.mp3',
-        img: '../uploads/falz the bad guy.jpg',
-        isFavorite: false,
-        artist: 'Beyonce fit wizkid'
-    },
-    {
-        id: 3,
-        name: '50_CENT_-_P.I.M.P._Pesni-Tut.mp3',
-        img: '../uploads/falz the bad guy.jpg',
-        isFavorite: false,
-        artist: '50_CENT'
-    },
-    {
-        id: 4,
-        name: 'Olamide_Motigbana_9jaflaver.com_.mp3',
-        img: '../uploads/falz the bad guy.jpg',
-        isFavorite: false,
-        artist: 'Olamide'
-    },
-    {
-        id: 5,
-        name: 'Rema - Iron Man (Pitakwa360.com Video_1559504979.mp3',
-        img: '../uploads/msc-image.jpg',
-        isFavorite: false,
-        artist: 'Rema'
-    },
-    {
-        id: 6,
-        name: 'Simi-–-Lovin.mp3',
-        img: '../uploads/falz the bad guy.jpg',
-        isFavorite: false,
-        artist: 'simi'
-    },
-    {
-        id: 7,
-        name: 'Skales_-_Booty_Language_Remix_Ft__Sarkodie.mp3',
-        img: '../uploads/msc-image.jpg',
-        isFavorite: false,
-        artist: 'skales'
-    } 
-];
+
+const loadMusicFromDb = () =>{
+    return JSON.parse(localStorage.getItem('music-library'))
+}
+
+let musicList;
+musicList = loadMusicFromDb();
+if(musicList == null || undefined){
+    console.log('music library not found changing to default library');
+    musicList = [
+        {
+            id: 1,
+            name: 'Kizz-Daniel-Pak-N-Go.mp3',
+            img: '../uploads/falz the bad guy.jpg',
+            isFavorite: false,
+            artist: 'kizz Daniel'
+        },
+        {
+            id: 2,
+            name: '15-BROWN-SKIN-GIRL-feat.-Blue-Ivy-C-Wizkid.mp3',
+            img: '../uploads/falz the bad guy.jpg',
+            isFavorite: false,
+            artist: 'Beyonce fit wizkid'
+        },
+        {
+            id: 3,
+            name: '50_CENT_-_P.I.M.P._Pesni-Tut.mp3',
+            img: '../uploads/falz the bad guy.jpg',
+            isFavorite: false,
+            artist: '50_CENT'
+        },
+        {
+            id: 4,
+            name: 'Olamide_Motigbana_9jaflaver.com_.mp3',
+            img: '../uploads/falz the bad guy.jpg',
+            isFavorite: false,
+            artist: 'Olamide'
+        },
+        {
+            id: 5,
+            name: 'Rema - Iron Man (Pitakwa360.com Video_1559504979.mp3',
+            img: '../uploads/msc-image.jpg',
+            isFavorite: false,
+            artist: 'Rema'
+        },
+        {
+            id: 6,
+            name: 'Simi-–-Lovin.mp3',
+            img: '../uploads/falz the bad guy.jpg',
+            isFavorite: false,
+            artist: 'simi'
+        },
+        {
+            id: 7,
+            name: 'Skales_-_Booty_Language_Remix_Ft__Sarkodie.mp3',
+            img: '../uploads/msc-image.jpg',
+            isFavorite: false,
+            artist: 'skales'
+        } 
+    ];
+}
 const favMusicList = [];
+
+musicList.forEach(music =>{
+    (music.isFavorite) ? favMusicList.push(music) : '';
+});
+console.log(favMusicList);
+
  //eslint-disable-line no-console
 const loadScreen = () =>{
     overlay.classList.remove('d-visible');
@@ -59,6 +75,7 @@ const loadScreen = () =>{
     root.classList.remove('d-none');
     root.classList.add('d-visible');
 }
+
 // const unLoadScreen = () =>{
 //     overlay.classList.remove('d-');
 //     overlay.classList.add('d-none');
@@ -68,7 +85,6 @@ const loadScreen = () =>{
 setTimeout(()=>{
     loadScreen();
 }, 3000);
-
 //variable declarations
 const buttons = document.querySelectorAll('a');
 const audio = document.querySelector('audio');
@@ -103,10 +119,21 @@ const toggleLoop = () =>{
         loopBtn.firstChild.style.color = 'lightgrey';
     }
 }
+const favourite  = (obj) =>{
+    let currentState = obj.isFavorite;
+    console.log(currentState);
+    if(currentState){
+        favButton.setAttribute('class', 'fa fa-heart');
+        favButton.style.color = 'rgba(82, 81, 190, 0.85)';
+    }else{
+        favButton.setAttribute('class', 'fa fa-heart-o');
+        favButton.style.color = 'lightgrey';
+    }
+}
 const toggleFavorite = () =>{
     //changes the  loop to true or false
-    fav = !fav;
-    if(fav){
+    musicList[c].isFavorite = !musicList[c].isFavorite;
+    if(musicList[c].isFavorite){
         favButton.setAttribute('class', 'fa fa-heart');
         favButton.style.color = 'rgba(82, 81, 190, 0.85)';
         musicList[c].isFavorite = true;
@@ -119,7 +146,7 @@ const toggleFavorite = () =>{
         musicList[c].isFavorite = false;
         favMusicList.splice(c, 1);
     }
-    console.log(favMusicList);
+    let saved = saveToDb(musicList);
 }
 const toggleMenu = () =>{
     //changes the  loop to true or false
@@ -192,12 +219,7 @@ const scrub = (e) =>{
 const toggleMouseDown = () =>{
     return mouseDown = !mouseDown;
 }
-const mouseDrag = (e) =>{
-    // let isDown = toggleMouseDown();
-    // if(isDown){
-    //     console.log(e);
-    // };
-}
+
 // rotate thumbnail
 const rotateThumbanil = () =>{
     thumbnail.style.transform = `rotate(${angle += 3}deg)`;
@@ -236,10 +258,19 @@ const previousMusic = () =>{
 }
 
 const saveToDb = (arr) =>{
-    localStorage.setItem('musc-library', JSON.stringify(arr));
+    localStorage.setItem('music-library', JSON.stringify(arr));
+    console.log('saving to db');
+    return true;
 }
 
 // adding of events
+if(audio.currentTime == 0){
+    console.log('music is set displaying the favorite state');
+    //favourite(musicList[c]);
+}else{
+    console.log('error showing the current state of isFavorite');
+}
+
 Array.from(buttons).forEach(btn =>{
     btn.addEventListener('click', ()=>{
         let id = btn.getAttribute('id');
@@ -269,6 +300,7 @@ audio.addEventListener('timeupdate', ()=>{
     timeupdate();
     updateBAr();
     rotateThumbanil();
+    favourite(musicList[c]);
 });
 
 
