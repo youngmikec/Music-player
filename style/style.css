@@ -4,6 +4,10 @@ body{
     margin: 0;
     padding: 0;
 }
+#nav i{
+    font-size: 20px;
+    color: white; 
+}
 i{
     font-size: 20px;
     color: rgb(187, 187, 187);
@@ -63,7 +67,7 @@ img{
 }
 #button-section{
     width: 100%; 
-    bottom: 5vh;
+    bottom: 2vh;
 }
 .c-fs{
     color: rgba(47, 44, 223, 0.74);
