@@ -136,4 +136,7 @@ audio{
         width: 52%;
         height: 63%;
     }
+    #button-section{
+        bottom: 10vh;
+    }
 }
